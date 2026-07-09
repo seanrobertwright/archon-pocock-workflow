@@ -1,0 +1,33 @@
+name: pocock-init
+description: |
+  Use when: Setting up a repo for the Pocock workflow family (run once per repo).
+  Input: Optional overrides, e.g. "PRs as request surface: yes"
+  Output: docs/agents/{issue-tracker,triage-labels,domain}.md, CONTEXT.md stub,
+  docs/adr/, triage labels on GitHub, and an "Agent skills" block in CLAUDE.md/AGENTS.md.
+
+  Non-interactive port of /setup-matt-pocock-skills with the GitHub preset.
+  Every defaulted decision is recorded in the setup report for the maintainer to revise.
+
+  Run with --no-worktree: this edits config docs on the current branch, not feature code.
+
+  NOT for: feature work (use pocock-spec-to-ship), repos without a GitHub remote.
+
+provider: claude
+model: sonnet
+
+nodes:
+  - id: preflight
+    bash: |
+      set -e
+      git rev-parse --is-inside-work-tree >/dev/null || { echo "Not a git repository"; exit 1; }
+      git remote get-url origin 2>/dev/null | grep -qi "github" || { echo "No GitHub remote found — this workflow family targets GitHub Issues"; exit 1; }
+      gh auth status >/dev/null 2>&1 || { echo "gh CLI is not authenticated — run 'gh auth login'"; exit 1; }
+      echo "Preflight OK: git repo with GitHub remote, gh authenticated"
+    timeout: 20000
+
+  - id: setup-docs
+    command: pocock-setup-docs
+    depends_on: [preflight]
+    skills:
+      - domain-modeling
+    context: fresh

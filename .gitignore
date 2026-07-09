@@ -1,0 +1,3 @@
+# Local dev convenience: upstream clone used to (re)copy skills into .claude/skills/.
+# The shipped snapshot lives in .claude/skills/ — see README "Update the skills".
+vendor/

@@ -1,0 +1,52 @@
+name: pocock-architecture-health
+description: |
+  Use when: Keeping the codebase good for agents to operate in — Pocock
+  recommends running /improve-codebase-architecture "once every few days".
+  Input: Optional focus area, e.g. "the ingest pipeline", or empty for the
+  whole codebase
+  Output: An HTML architecture report in the run artifacts, and the strongest
+  deepening opportunities filed as `architecture-candidate` issues.
+
+  This is the SURVEY half of the skill only. Candidates are ideas, and per the
+  ask-matt map an idea enters the main flow through an interactive
+  /grill-with-docs session — so filed issues are deliberately NOT
+  ready-for-agent, and nothing here edits code.
+
+  Run with --no-worktree (read-only on the working tree). Safe to run on a
+  schedule.
+
+  NOT for: implementing refactors (grill the candidate, /to-spec it, then
+  pocock-spec-to-ship), quick code review (pocock workflows' review nodes).
+
+provider: claude
+model: sonnet
+
+nodes:
+  - id: scan
+    command: pocock-architecture-scan
+    skills:
+      - codebase-design
+      - improve-codebase-architecture
+    context: fresh
+    output_format:
+      type: object
+      properties:
+        candidates:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              strength:
+                type: string
+                enum: [Strong, Worth exploring, Speculative]
+              summary:
+                type: string
+            required: [title, strength, summary]
+      required: [candidates]
+
+  - id: file-issues
+    command: pocock-architecture-file-issues
+    depends_on: [scan]
+    context: fresh

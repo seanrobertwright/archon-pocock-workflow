@@ -1,0 +1,243 @@
+<svg viewBox="0 0 960 720" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', -apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <title>Matt Pocock Skills v1.1 orchestrated by Archon — think interactive, ship AFK</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/>
+      <stop offset="1" stop-color="#131a36"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e879f9"/>
+      <stop offset="0.5" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <linearGradient id="thinkGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#fbbf24"/>
+    </linearGradient>
+    <linearGradient id="shipGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="rampGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fb7185"/>
+      <stop offset="1" stop-color="#f472b6"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/>
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowRose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#34d399"/>
+    </marker>
+    <style><![CDATA[
+      text { fill: #e5e7eb; }
+      .lane-label { font-size: 15px; font-weight: 700; letter-spacing: 2.5px; }
+      .node-title { font-size: 15px; font-weight: 700; }
+      .node-sub   { font-size: 10.5px; fill: #9ca3af; }
+      .chip-text  { font-size: 12.5px; font-weight: 600; }
+      .tiny       { font-size: 10px; fill: #6b7280; }
+      .flow {
+        fill: none; stroke-width: 2.5; stroke-dasharray: 7 7;
+        animation: dash 0.9s linear infinite;
+      }
+      .flow-slow { animation-duration: 1.6s; }
+      @keyframes dash { to { stroke-dashoffset: -14; } }
+      .pulse { animation: pulse 2.6s ease-in-out infinite; }
+      .pulse.d1 { animation-delay: .4s; } .pulse.d2 { animation-delay: .8s; }
+      .pulse.d3 { animation-delay: 1.2s; } .pulse.d4 { animation-delay: 1.6s; }
+      .pulse.d5 { animation-delay: 2.0s; }
+      @keyframes pulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+      .twinkle { animation: twinkle 3.4s ease-in-out infinite; }
+      .twinkle.t2 { animation-delay: 1.1s; } .twinkle.t3 { animation-delay: 2.2s; }
+      @keyframes twinkle { 0%,100% { opacity: .15; } 50% { opacity: .9; } }
+      .red-green-r { animation: rg 2s steps(1) infinite; }
+      .red-green-g { animation: gr 2s steps(1) infinite; }
+      @keyframes rg { 0%,49% { opacity: 1; } 50%,100% { opacity: .15; } }
+      @keyframes gr { 0%,49% { opacity: .15; } 50%,100% { opacity: 1; } }
+      .rocket { animation: bob 1.8s ease-in-out infinite; }
+      @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+      .hue { animation: hue 9s linear infinite; }
+      @keyframes hue { to { filter: hue-rotate(360deg); } }
+    ]]></style>
+  </defs>
+
+  <!-- ══ backdrop ══ -->
+  <rect width="960" height="720" rx="18" fill="url(#bg)"/>
+  <rect x="1.5" y="1.5" width="957" height="717" rx="17" fill="none" stroke="#334155" stroke-width="1.5"/>
+  <g fill="#93c5fd">
+    <circle class="twinkle"    cx="905" cy="60"  r="1.8"/>
+    <circle class="twinkle t2" cx="60"  cy="90"  r="1.5"/>
+    <circle class="twinkle t3" cx="930" cy="300" r="1.6"/>
+    <circle class="twinkle t2" cx="30"  cy="420" r="1.8"/>
+    <circle class="twinkle"    cx="530" cy="60"  r="1.4"/>
+    <circle class="twinkle t3" cx="120" cy="680" r="1.5"/>
+    <circle class="twinkle"    cx="870" cy="690" r="1.7"/>
+  </g>
+
+  <!-- ══ title ══ -->
+  <g class="hue">
+    <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="800" fill="url(#titleGrad)" letter-spacing="1">MATT POCOCK SKILLS v1.1 &#215; ARCHON</text>
+  </g>
+  <text x="480" y="72" text-anchor="middle" font-size="13.5" fill="#94a3b8" font-style="italic">think together, interactively &#8226; ship disciplined, AFK</text>
+
+  <!-- ══════════ BAND 1 · THINK (interactive) ══════════ -->
+  <rect x="40" y="96" width="880" height="164" rx="14" fill="#f59e0b" opacity="0.06"/>
+  <rect x="40" y="96" width="880" height="164" rx="14" fill="none" stroke="#f59e0b" stroke-opacity="0.35" stroke-width="1.2"/>
+  <text x="60" y="120" class="lane-label" fill="#fbbf24">1 &#183; THINK &#8212; INTERACTIVE &#183; CLAUDE CODE &#183; ONE UNBROKEN CONTEXT</text>
+
+  <!-- grill-with-docs -->
+  <g class="pulse"><rect x="66" y="146" width="180" height="62" rx="12" fill="none" stroke="#fbbf24" stroke-width="2.5" filter="url(#glow)"/></g>
+  <rect x="66" y="146" width="180" height="62" rx="12" fill="#1c2440" stroke="url(#thinkGrad)" stroke-width="1.6"/>
+  <text x="156" y="172" text-anchor="middle" class="node-title">&#128293; /grill-with-docs</text>
+  <text x="156" y="192" text-anchor="middle" class="node-sub">relentless interview &#8212; the misalignment fix</text>
+  <text x="156" y="228" text-anchor="middle" class="tiny">&#9997;&#65039; CONTEXT.md + ADRs update live underneath</text>
+
+  <!-- prototype detour -->
+  <rect x="356" y="126" width="180" height="38" rx="19" fill="#1c2440" stroke="#fbbf24" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <text x="446" y="150" text-anchor="middle" class="chip-text" fill="#fde68a">&#129514; /prototype detour</text>
+  <path class="flow flow-slow" stroke="#f59e0b" d="M 246 158 C 290 130, 320 140, 352 143" marker-end="url(#arrowAmber)"/>
+  <path class="flow flow-slow" stroke="#f59e0b" d="M 540 143 C 580 138, 620 148, 656 158" marker-end="url(#arrowAmber)"/>
+  <text x="300" y="128" class="tiny" text-anchor="middle">/handoff out</text>
+  <text x="600" y="128" class="tiny" text-anchor="middle">/handoff back</text>
+
+  <!-- wayfinder on-ramp into to-spec -->
+  <rect x="356" y="212" width="180" height="38" rx="19" fill="#1c2440" stroke="#fb7185" stroke-width="1.3"/>
+  <text x="446" y="236" text-anchor="middle" class="chip-text" fill="#fda4af">&#129517; /wayfinder &#8212; foggy epics</text>
+  <path class="flow flow-slow" stroke="#fb7185" d="M 540 228 C 600 224, 640 214, 668 204" marker-end="url(#arrowRose)"/>
+
+  <!-- main think arrow -->
+  <path class="flow" stroke="#fbbf24" stroke-width="3" d="M 250 177 H 652" marker-end="url(#arrowAmber)"/>
+
+  <!-- to-spec -->
+  <g class="pulse d1"><rect x="660" y="146" width="180" height="62" rx="12" fill="none" stroke="#fbbf24" stroke-width="2.5" filter="url(#glow)"/></g>
+  <rect x="660" y="146" width="180" height="62" rx="12" fill="#1c2440" stroke="url(#thinkGrad)" stroke-width="1.6"/>
+  <text x="750" y="172" text-anchor="middle" class="node-title">&#128220; /to-spec</text>
+  <text x="750" y="192" text-anchor="middle" class="node-sub">the thread becomes a spec issue</text>
+
+  <!-- ══════════ THE HANDOFF ══════════ -->
+  <path class="flow" stroke="#67e8f9" stroke-width="3" d="M 750 208 V 296" marker-end="url(#arrowCyan)"/>
+  <g class="pulse d2"><circle cx="750" cy="252" r="15" fill="#0e7490" filter="url(#glow)"/></g>
+  <text x="750" y="258" text-anchor="middle" font-size="15">&#127915;</text>
+  <line x1="40" y1="278" x2="700" y2="278" stroke="#475569" stroke-width="1.2" stroke-dasharray="10 8"/>
+  <text x="60" y="272" class="tiny" fill="#fbbf24" font-weight="700">HUMAN CONTEXT ENDS</text>
+  <text x="60" y="292" class="tiny" fill="#67e8f9" font-weight="700">ARCHON TAKES OVER &#8212; the spec issue is the handoff artifact</text>
+
+  <!-- ══════════ BAND 2 · SHIP (AFK) ══════════ -->
+  <rect x="40" y="306" width="880" height="250" rx="14" fill="#22d3ee" opacity="0.05"/>
+  <rect x="40" y="306" width="880" height="250" rx="14" fill="none" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1.2"/>
+  <text x="60" y="330" class="lane-label" fill="#67e8f9">2 &#183; SHIP &#8212; AFK &#183; archon workflow run pocock-spec-to-ship</text>
+
+  <!-- to-tickets -->
+  <g class="pulse d2"><rect x="60" y="352" width="172" height="66" rx="12" fill="none" stroke="#22d3ee" stroke-width="2.5" filter="url(#glow)"/></g>
+  <rect x="60" y="352" width="172" height="66" rx="12" fill="#16213e" stroke="url(#shipGrad)" stroke-width="1.6"/>
+  <text x="146" y="378" text-anchor="middle" class="node-title">&#127903;&#65039; /to-tickets</text>
+  <text x="146" y="396" text-anchor="middle" class="node-sub">tracer-bullet GitHub issues</text>
+  <text x="146" y="410" text-anchor="middle" class="node-sub">with blocking edges</text>
+
+  <path class="flow" stroke="#67e8f9" d="M 236 385 H 292" marker-end="url(#arrowCyan)"/>
+
+  <!-- implement frontier loop -->
+  <g class="pulse d3"><rect x="300" y="345" width="196" height="80" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5" filter="url(#glow)"/></g>
+  <rect x="300" y="345" width="196" height="80" rx="12" fill="#16213e" stroke="url(#shipGrad)" stroke-width="1.6"/>
+  <text x="398" y="370" text-anchor="middle" class="node-title">&#9851;&#65039; /implement frontier</text>
+  <text x="398" y="388" text-anchor="middle" class="node-sub">one ticket per fresh context</text>
+  <circle class="red-green-r" cx="360" cy="406" r="6" fill="#ef4444"/>
+  <circle class="red-green-g" cx="384" cy="406" r="6" fill="#22c55e"/>
+  <text x="400" y="411" class="node-sub" font-size="11">/tdd red&#8594;green</text>
+
+  <path class="flow" stroke="#67e8f9" d="M 500 385 H 552" marker-end="url(#arrowCyan)"/>
+
+  <!-- validate -->
+  <g class="pulse d4"><rect x="560" y="352" width="128" height="66" rx="12" fill="none" stroke="#22d3ee" stroke-width="2.5" filter="url(#glow)"/></g>
+  <rect x="560" y="352" width="128" height="66" rx="12" fill="#16213e" stroke="url(#shipGrad)" stroke-width="1.6"/>
+  <text x="624" y="382" text-anchor="middle" class="node-title">&#9989; validate</text>
+  <text x="624" y="400" text-anchor="middle" class="node-sub">full suite, made green</text>
+
+  <path class="flow" stroke="#67e8f9" d="M 692 385 H 744" marker-end="url(#arrowCyan)"/>
+
+  <!-- two-axis review -->
+  <g class="pulse d5"><rect x="752" y="340" width="152" height="92" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5" filter="url(#glow)"/></g>
+  <rect x="752" y="340" width="152" height="92" rx="12" fill="#16213e" stroke="url(#shipGrad)" stroke-width="1.6"/>
+  <text x="828" y="362" text-anchor="middle" class="node-title">&#9878;&#65039; /code-review</text>
+  <rect x="766" y="372" width="124" height="22" rx="6" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+  <text x="828" y="387" text-anchor="middle" class="node-sub" fill="#a5f3fc">Standards axis</text>
+  <rect x="766" y="400" width="124" height="22" rx="6" fill="#1e293b" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="828" y="415" text-anchor="middle" class="node-sub" fill="#ddd6fe">Spec axis</text>
+  <text x="908" y="390" class="tiny" transform="rotate(90 908 390)" text-anchor="middle">parallel &#183; isolated</text>
+
+  <!-- row 2: fix findings -> PR -->
+  <path class="flow" stroke="#67e8f9" d="M 828 432 V 470" marker-end="url(#arrowCyan)"/>
+  <rect x="700" y="478" width="204" height="56" rx="12" fill="#16213e" stroke="url(#shipGrad)" stroke-width="1.6"/>
+  <text x="802" y="501" text-anchor="middle" class="node-title">&#128295; fix findings</text>
+  <text x="802" y="519" text-anchor="middle" class="node-sub">axes never merged or reranked</text>
+
+  <path class="flow" stroke="#67e8f9" d="M 696 506 H 560" marker-end="url(#arrowCyan)"/>
+
+  <g class="pulse"><rect x="380" y="478" width="172" height="56" rx="12" fill="none" stroke="#34d399" stroke-width="2.5" filter="url(#glow)"/></g>
+  <rect x="380" y="478" width="172" height="56" rx="12" fill="#122b22" stroke="#34d399" stroke-width="1.6"/>
+  <g class="rocket"><text x="466" y="502" text-anchor="middle" class="node-title">&#128640; pull request</text></g>
+  <text x="466" y="520" text-anchor="middle" class="node-sub">spec-linked &#183; review summary</text>
+
+  <!-- ══════════ BAND 3 · ON-RAMPS & UPKEEP ══════════ -->
+  <rect x="40" y="574" width="880" height="96" rx="14" fill="#fb7185" opacity="0.05"/>
+  <rect x="40" y="574" width="880" height="96" rx="14" fill="none" stroke="#fb7185" stroke-opacity="0.35" stroke-width="1.2"/>
+  <text x="60" y="598" class="lane-label" fill="#fda4af" font-size="13">ON-RAMPS &amp; UPKEEP &#8212; AFK workflows that feed the flow</text>
+
+  <rect x="60" y="610" width="196" height="44" rx="22" fill="#1c2440" stroke="url(#rampGrad)" stroke-width="1.5"/>
+  <text x="158" y="631" text-anchor="middle" class="chip-text">&#127991;&#65039; pocock-triage</text>
+  <text x="158" y="646" text-anchor="middle" class="tiny">queue &#8594; ready-for-agent</text>
+
+  <rect x="276" y="610" width="196" height="44" rx="22" fill="#1c2440" stroke="url(#rampGrad)" stroke-width="1.5"/>
+  <text x="374" y="631" text-anchor="middle" class="chip-text">&#128027; pocock-fix-bug</text>
+  <text x="374" y="646" text-anchor="middle" class="tiny">diagnose loop &#8594; fix &#8594; PR</text>
+
+  <rect x="492" y="610" width="212" height="44" rx="22" fill="#1c2440" stroke="url(#rampGrad)" stroke-width="1.5"/>
+  <text x="598" y="631" text-anchor="middle" class="chip-text">&#127769; pocock-wayfinder-afk</text>
+  <text x="598" y="646" text-anchor="middle" class="tiny">research tickets cleared overnight</text>
+
+  <rect x="724" y="610" width="196" height="44" rx="22" fill="#1c2440" stroke="url(#rampGrad)" stroke-width="1.5"/>
+  <text x="822" y="631" text-anchor="middle" class="chip-text">&#127963;&#65039; architecture-health</text>
+  <text x="822" y="646" text-anchor="middle" class="tiny">deepening candidates filed</text>
+
+  <!-- on-ramp feeds -->
+  <path class="flow flow-slow" stroke="#fb7185" d="M 158 606 C 150 580, 148 560, 146 540 L 146 422" marker-end="url(#arrowRose)" opacity="0.8"/>
+  <path class="flow flow-slow" stroke="#fb7185" d="M 374 606 C 380 580, 390 560, 396 540 L 398 429" marker-end="url(#arrowRose)" opacity="0.8"/>
+  <path class="flow flow-slow" stroke="#fb7185" d="M 598 606 C 590 520, 560 320, 448 250 L 444 254" marker-end="url(#arrowRose)" opacity="0.65"/>
+
+  <!-- feedback: ideas re-enter at grill -->
+  <path class="flow flow-slow" stroke="#34d399" d="M 920 632 C 950 500, 950 260, 900 200 C 880 178, 866 172, 848 172" marker-end="url(#arrowGreen)" opacity="0.75"/>
+  <text x="944" y="420" class="tiny" fill="#6ee7b7" transform="rotate(90 944 420)" text-anchor="middle">ideas re-enter at /grill-with-docs</text>
+
+  <!-- traveling sparks along the main route -->
+  <circle r="4.5" fill="#fde68a" filter="url(#softglow)">
+    <animateMotion dur="3.2s" repeatCount="indefinite" path="M 250 177 H 652"/>
+  </circle>
+  <circle r="4.5" fill="#a5f3fc" filter="url(#softglow)">
+    <animateMotion dur="2.4s" repeatCount="indefinite" path="M 750 208 V 296"/>
+  </circle>
+  <circle r="4.5" fill="#a5f3fc" filter="url(#softglow)">
+    <animateMotion dur="5.2s" repeatCount="indefinite" path="M 236 385 H 744"/>
+  </circle>
+  <circle r="4.5" fill="#6ee7b7" filter="url(#softglow)">
+    <animateMotion dur="3.6s" repeatCount="indefinite" path="M 828 432 V 474"/>
+  </circle>
+  <circle r="4.5" fill="#6ee7b7" filter="url(#softglow)">
+    <animateMotion dur="3s" repeatCount="indefinite" path="M 696 506 H 556"/>
+  </circle>
+
+  <!-- footer -->
+  <text x="480" y="700" text-anchor="middle" class="tiny" font-size="11">Matt Pocock &#8220;Skills for Real Engineers&#8221; v1.1.0 &#8226; orchestrated by Archon &#8226; grilling stays human &#8212; discipline goes AFK</text>
+</svg>

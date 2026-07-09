@@ -1,0 +1,139 @@
+name: pocock-fix-bug
+description: |
+  Use when: Something is broken — a bug report, a regression, a flake — and you
+  want Pocock's /diagnosing-bugs discipline run end to end, AFK.
+  Input: Issue number or a description of the broken behavior
+  Output: PR with the fix, a regression test at a correct seam (or its absence
+  documented), a post-mortem, and an architecture-candidate issue if the real
+  finding is that no good seam exists.
+
+  The discipline (v1.1 diagnosing-bugs):
+  1. Diagnose loop — build a TIGHT feedback loop FIRST (no red-capable command,
+     no hypotheses), reproduce, minimise, rank falsifiable hypotheses,
+     instrument one variable at a time. Threaded context: the loop remembers
+     its rejected hypotheses across iterations.
+  2. Fix — regression test BEFORE the fix, cleanup, post-mortem.
+  3. Two-axis review (Standards | the originating issue as Spec), fix findings.
+  4. PR with the confirmed hypothesis in the message.
+
+  If a feedback loop genuinely cannot be built, the diagnose node exhausts its
+  iterations and the workflow FAILS — that is correct behavior per the skill
+  ("do not proceed to hypothesise without a loop"). Read the last iteration's
+  output for what was tried, provide a repro artifact, then --resume.
+
+  NOT for: trivially obvious fixes (archon-assist), feature work (pocock-spec-to-ship).
+
+provider: claude
+model: sonnet
+
+nodes:
+  - id: gather
+    prompt: |
+      Assemble the bug report. Input: $ARGUMENTS
+
+      If the input contains a GitHub issue number/URL, fetch the full issue and
+      all comments with `gh issue view <n> --comments`. Otherwise the input text
+      is the report. Read CONTEXT.md (if present) for the project's domain
+      language and check docs/adr/ for decisions in the affected area.
+
+      Write $ARTIFACTS_DIR/bug-report.md: the exact user-visible symptom, exact
+      reproduction info available so far, affected area in domain vocabulary,
+      and the issue number if there is one. Output a two-line summary.
+    context: fresh
+
+  - id: diagnose
+    depends_on: [gather]
+    idle_timeout: 900000
+    loop:
+      prompt: |
+        You are running Phases 1-4 of the diagnosing-bugs skill. Read
+        .claude/skills/diagnosing-bugs/SKILL.md and follow it EXACTLY — it is
+        the discipline, this prompt only adapts it to an AFK run.
+
+        Bug report: $ARTIFACTS_DIR/bug-report.md (read it first).
+
+        - Phase 1 is the skill: build a TIGHT, red-capable, deterministic,
+          agent-runnable feedback loop. Refuse to theorise before it exists.
+        - Phase 3 AFK delta: you cannot show the ranked hypotheses to a human —
+          record the ranked list in $ARTIFACTS_DIR/diagnosis.md and proceed
+          with your own ranking (the skill permits this when the user is AFK).
+        - Phase 4: one variable at a time; tag every debug log [DEBUG-<id>].
+
+        This loop THREADS context: you remember previous iterations. Use each
+        iteration to advance one phase or falsify one hypothesis; keep
+        $ARTIFACTS_DIR/diagnosis.md current as you go.
+
+        When a hypothesis is CONFIRMED by instrumentation, finalize
+        $ARTIFACTS_DIR/diagnosis.md with: the feedback-loop command (pasted
+        invocation + output), the minimised repro, the confirmed hypothesis and
+        its evidence, and the rejected hypotheses. Then output:
+        <promise>DIAGNOSED</promise>
+
+        Do NOT fix anything yet. Do NOT output the promise on a hunch — only on
+        instrumented confirmation.
+      until: DIAGNOSED
+      max_iterations: 8
+      fresh_context: false
+
+  - id: fix
+    command: pocock-diagnose-fix
+    depends_on: [diagnose]
+    skills:
+      - tdd
+      - diagnosing-bugs
+    context: fresh
+    output_format:
+      type: object
+      properties:
+        architectural_followup:
+          type: string
+          enum: ["yes", "no"]
+        reason:
+          type: string
+      required: [architectural_followup]
+
+  - id: review-standards
+    command: pocock-review-standards
+    depends_on: [fix]
+    skills:
+      - code-review
+      - codebase-design
+    context: fresh
+
+  - id: review-spec
+    command: pocock-review-spec
+    depends_on: [fix]
+    skills:
+      - code-review
+    context: fresh
+
+  - id: fix-findings
+    command: pocock-fix-review-findings
+    depends_on: [review-standards, review-spec]
+    skills:
+      - tdd
+      - code-review
+    context: fresh
+
+  - id: create-pr
+    command: pocock-create-pr
+    depends_on: [fix-findings]
+    context: fresh
+
+  # Post-mortem said the codebase prevented locking this bug down — file the
+  # finding so it re-enters the main flow via /grill-with-docs (ask-matt map).
+  - id: file-architecture-followup
+    prompt: |
+      The bug-fix post-mortem found an architectural gap. Read
+      $ARTIFACTS_DIR/postmortem.md and $ARTIFACTS_DIR/.pr-url.
+
+      Create a GitHub issue labeled `architecture-candidate` (create the label
+      with `gh label create architecture-candidate --force` first). Body starts
+      with `> *This was generated by AI during an Archon workflow run.*`, then:
+      the bug it came from (and PR link), the gap in codebase-design vocabulary
+      (seam, locality, depth — read .claude/skills/codebase-design/SKILL.md if
+      unsure), why the regression could not be locked down, and the closing
+      line: "Next step: take this into /grill-with-docs." Output the issue URL.
+    depends_on: [create-pr]
+    when: "$fix.output.architectural_followup == 'yes'"
+    context: fresh
