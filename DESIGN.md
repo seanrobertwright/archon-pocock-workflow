@@ -4,9 +4,9 @@
 
 An [Archon](https://github.com/coleam00/Archon) (v0.5, TypeScript workflow engine) workflow pack that encodes the end-to-end engineering flow from [Matt Pocock's skills](https://github.com/mattpocock/skills) at tag **v1.1.0**, as documented by his `ask-matt` router skill.
 
-## Source-of-truth note (the "v1.1" question)
+## Source of truth
 
-The `aurorasoft2/Matt_Pocock_Skills` fork does **not** contain v1.1 — it has no tags/releases and its `main` is a diverged v1.0-era snapshot (~4,400 lines behind). `v1.1.0` is a tag on upstream `mattpocock/skills`. This pack ships the **upstream v1.1.0** skill directories, copied into `.claude/skills/` (MIT, attribution in `LICENSE`; a local `vendor/` clone at the tag is the gitignored dev convenience used to produce/refresh the copies). v1.1 renames: `diagnose`→`diagnosing-bugs`, `to-prd`→`to-spec`, `to-issues`→`to-tickets`, `zoom-out`→`wayfinder`; and adds `implement`, `code-review`, `research`, `domain-modeling`, `codebase-design`, `prototype`, `wayfinder`, `handoff`, `ask-matt`, `grilling`, `teach`, `writing-great-skills`.
+Skills are sourced from **`mattpocock/skills` at tag `v1.1.0`** (commit `d574778f94cf620fcc8ce741584093bc650a61d3`). The 18 shipped directories under `.claude/skills/` are verified byte-identical to that tag (MIT, attribution in `LICENSE`); a local `vendor/` clone at the tag is the gitignored dev convenience used to produce/refresh the copies. v1.1 renames from earlier versions: `diagnose`→`diagnosing-bugs`, `to-prd`→`to-spec`, `to-issues`→`to-tickets`, `zoom-out`→`wayfinder`; and adds `implement`, `code-review`, `research`, `domain-modeling`, `codebase-design`, `prototype`, `wayfinder`, `handoff`, `ask-matt`, `grilling`, `teach`, `writing-great-skills`.
 
 ## Decisions (made 2026-07-08)
 
