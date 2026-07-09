@@ -13,7 +13,8 @@
   <img src="assets/pocock-flow.svg" width="920" alt="Animated map of the full flow: interactive grilling and spec-writing hand off to AFK Archon workflows — tickets, TDD frontier loop, validation, two-axis review, PR — with triage, bug-fix, wayfinder and architecture-health on-ramps feeding back in"/>
 </p>
 
-See [DESIGN.md](./DESIGN.md) for the full rationale and mapping.
+See [DESIGN.md](./DESIGN.md) for the full rationale and mapping — or jump straight to the
+**[tutorial](./docs/TUTORIAL.md)**, which builds an elaborate Kanban app end-to-end using every workflow in the family.
 
 ## What's in the box
 
